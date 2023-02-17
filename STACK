@@ -1,0 +1,98 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+#define max 4
+int stack_arr[max];
+int top = -1;
+void push(int);
+int pop();
+int isfull();
+int isempty();
+int view();
+int main() {
+   int i,data;
+   while(1){
+       printf("\n1 : push \n 2 : pop \n 3 : isFull \n 4 : isEmpty \n 5 : view stack \n 6 : Exit");
+       printf("\nenter your choise : ");
+       scanf("%d",&i);
+       switch(i){
+           case 1:
+           printf("\nenter number : ");
+           scanf("%d",&data);
+           push(data);
+           break;
+           case 2:
+           data = pop();
+           printf("pop element is : %d",data);
+           break;
+           case 3:
+           if(isfull())
+               printf("\nyes stack is full...");
+               else
+               printf("\nnot full.");
+               break;
+           case 4:
+           if(isempty())
+               printf("\nstack is empty..");
+               else
+               printf("\nnot empty..");
+               break;
+           case 5:
+               view();
+               break;
+            case 6:
+            exit(1);
+            default:
+            printf("\nplease enter valid choise..");
+       }
+   }
+    return 0;
+}
+void push(int val){
+    if(isfull()){
+        printf("stack is overflow");
+        return;
+    }
+    top = top+1;
+    stack_arr[top]=val;
+    printf("\n data add in stack");
+}
+int pop(){
+    int val;
+    if(isempty()){
+        printf("stack is empty..");
+        exit(1);
+    }
+    val=stack_arr[top];
+    top--;
+    return val;
+}
+
+int isfull(){
+    if(top == (max-1))
+        return 1;
+        else
+        return 0;
+}
+int isempty(){
+    if(top == -1)
+    return 1;
+    else
+    return 0;
+}
+int view(){
+    int i;
+    printf("\n");
+    if(isempty())
+        printf("stack is empty");
+    else{
+    for(i=top;i>-1;i--)
+        printf(" %d ",stack_arr[i]);
+    }
+}
+
+
+
+
+
+
