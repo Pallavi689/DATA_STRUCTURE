@@ -1,0 +1,118 @@
+
+#include <stdio.h>
+#include<stdlib.h>
+# define max 4
+int queue_arr[max];
+int front = -1,rear = -1;
+int enqueue(int);
+int dequeue();
+int display();
+int isfull();
+int isempty();
+
+
+int main() {
+   int data,i;
+   while(1){
+       printf("\n1: insert data in Queue \n 2: dalete data in Queue \n 3: display Queue \n 4: check queue is full ? \n 5: check queue is empty? \n 6: peek value \n 7: exit \n enter your choise :");
+       scanf("%d",&i);
+   switch(i){
+       case 1:
+       if(isfull())
+       printf("\nQueue is full.");
+       else{
+       printf("\n enter data :");
+       scanf("%d",&data);
+       enqueue(data);}
+       break;
+       case 2:
+       if(isempty())
+       printf("\nQueue is empty .");
+       else
+       dequeue();
+       break;
+       case 3:
+       display();
+       break;
+       case 4:
+       if(isfull())
+       printf("\n yes Queue is full..");
+       else
+       printf("\n no queue is not full..");
+       break;
+       case 5:
+       if(isempty())
+       printf("\n yes Queue is empty..");
+       else
+       printf("\n no queue is not empty..");
+       break;
+       case 6:
+       if(isempty())
+       printf("\nQueue is empty");
+       else
+       printf("\n peek value is : %d",queue_arr[front]);
+       break;
+       case 7:
+       exit(1);
+       default:
+       printf("\nenter a valid choise");
+   } 
+   }
+
+    return 0;
+}
+int enqueue(int data){
+    if(isfull())
+    printf("\nQueue is full");
+    else if(front == -1)
+             front = 0 ;
+    rear++;
+    queue_arr[rear]=data;
+    printf("\ndata inserted..");
+    
+}
+
+int isfull(){
+    if(rear == (max-1))
+    return 1;
+    else
+    return 0;
+}
+ int isempty(){
+     if(rear == -1)
+     return 1;
+     else 
+     return 0;
+ }
+int dequeue(){
+    if(isempty())
+    printf("\nQueue is empty..");
+    else
+    {printf("\ndeleated element is %d",queue_arr[front]);
+    front ++;
+    if(front > rear)
+    front=rear=-1;}
+}
+
+int display(){
+    if(isempty())
+    printf("\nQueue is empty.");
+    else if(isfull())
+    printf("\nQueue is full. ");
+    else{
+    int i;
+    printf("\n");
+    for(i=0;i<=rear;i++){
+        printf(" %d ",queue_arr[i]);
+    }
+}}
+
+
+
+
+
+
+
+
+
+
