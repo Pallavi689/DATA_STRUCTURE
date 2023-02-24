@@ -1,0 +1,184 @@
+
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+int add_big(struct node **head,int data){
+        struct node *temp = malloc(sizeof(struct node*));
+        temp->data=data;
+        temp->next = *head;
+        temp->prev=NULL;
+        *head = temp;
+        printf("\n%d is inserted...",temp->data);
+    }
+
+int print_all(struct node *head){
+    if(head == NULL){
+        printf("\nnull node");
+    }else
+    { 
+        struct node *temp=head;
+        printf("\n your list.\n");
+        while(temp != NULL){
+            printf("--->%d",temp->data);
+            temp=temp->next;
+        }
+    }
+}
+int add_end(struct node **head,int data){
+    struct node *temp1=malloc(sizeof(struct node*));
+    temp1->data=data;
+    temp1->next=NULL;
+
+    if(*head == NULL){
+        temp1->prev=NULL;
+        *head= temp1;
+    }else
+    {
+       struct node *temp = *head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+       temp->next=temp1;
+       temp1->prev=temp;
+        
+    }
+    printf("\n%d is inserted...",temp1->data);
+}
+int add_at_pos(struct node **head,int data,int pos){
+    struct node *ptr=malloc(sizeof(struct node));
+    struct node *temp=*head;
+    ptr->data=data;
+    ptr->next=NULL;
+    if(pos==1){
+        ptr->prev=NULL;
+        ptr->next=temp;
+        *head = ptr;
+    }else
+    {
+        struct node *temp1=*head;
+        pos--;
+        while(pos!=0){
+            temp = temp1;;
+            temp1=temp1->next;
+            pos--;
+        }
+        
+        temp->next=ptr;
+        ptr->next = temp1;
+    }
+    printf("\n%d is inserted...",ptr->data);
+}
+int del_first(struct node **head){
+    if(*head == NULL){
+        printf("\n empty list");
+    }else
+    {
+        struct node *temp=*head;
+        *head = temp->next;
+        //head->next=NULL;
+        free(temp);
+        temp=NULL;
+    }
+    printf("\n data is deleated ...");
+}
+int del_end(struct node **head){
+    struct node *ptr=*head;
+    if(*head==NULL){
+        printf("\n list is empty");
+    }else
+    if(ptr->next == NULL)
+    { free(*head);
+     *head = NULL;
+        }else{
+        struct node *ptr=*head;
+        struct node *ptr1;
+        while(ptr->next!=NULL){
+            ptr1=ptr;
+            ptr=ptr->next;
+        }
+        ptr1->next=NULL;
+        free(ptr);
+        ptr=NULL;
+    }
+    printf("\nlast data is deleated");
+}
+int del_at_pos(struct node **head,int pos){
+    struct node *ptr=*head;
+    if(*head == NULL)
+    printf("\n list is empty");
+    else if(pos == 1)
+    {
+        *head = ptr->next;
+        free(ptr);
+        ptr=NULL;
+    }else{
+        struct node *ptr1=*head;
+        pos--;
+        while(pos!=0){
+            ptr1=ptr;
+            ptr=ptr->next;
+            pos--;
+        }
+        ptr1->next=ptr->next;
+        free(ptr);
+        ptr=NULL;
+    }
+    printf("\n data is deleated ...");
+}
+int main() {
+    struct node*head=NULL;
+    int i,data,pos;
+    while(1){
+        printf("\n1: add data in a beginning \n 2: add data in end \n 3: add data in given position \n 4: delete first element \n 5: delete in end \n 6: detete to given position \n 7: show element \n 8: exit \n Enter your choise : ");
+        scanf("%d",&i);
+        switch(i){
+            case 1:
+            printf("\nEnter your data: ");
+            scanf("%d",&data);
+            add_big(&head,data);
+            break;
+            case 2:
+            printf("\nEnter your data: ");
+            scanf("%d",&data);
+            add_end(&head,data);
+            break;
+            case 3:
+            printf("\nEnter your data: ");
+            scanf("%d",&data);
+            printf("\nEnter position: ");
+            scanf("%d",&pos);
+            add_at_pos(&head,data,pos);
+            break;
+            case 4:
+            del_first(&head);
+            break;
+            case 5:
+            del_end(&head);
+            break;
+            case 6:
+            printf("\nEnter position: ");
+            scanf("%d",&pos);
+            del_at_pos(&head,pos);
+            break;
+            case 7:
+            print_all(head);
+            break;
+            case 8:
+            exit(1);
+            default:
+            printf("\nplease enter right choise : ");
+        }
+    }
+
+    return 0;
+}               
+
+
+
+
+
+
