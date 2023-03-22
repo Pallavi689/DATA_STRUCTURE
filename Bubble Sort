@@ -1,0 +1,29 @@
+/*Bubble sort is a sorting algorithm that works by repeatedly stepping through lists that need to be sorted,
+comparing each pair of adjacent items and swapping them if they are in the wrong order.
+This passing procedure is repeated until no swaps are required, indicating that the list is sorted.*/
+
+#include <stdio.h>
+void bubblesort(int data[],int size){
+    for(int i =0;i<size-1;i++){
+        for(int j=0;j<size-i-1;j++){
+            if(data[j]>data[j+1]){
+                int temp = data[j];
+                data[j]=data[j+1];
+                data[j+1]=temp;
+            }
+        }
+    }
+}
+void print(int data[],int size){
+    for(int i=0;i<size;i++){
+        printf("%d " ,data[i]);
+    }
+}
+int main() {
+    int data[]={13,-2,43,3,3,41,32};
+    int size = sizeof(data)/sizeof(data[0]);
+    bubblesort(data,size);
+    print(data,size);
+
+    return 0;
+}
