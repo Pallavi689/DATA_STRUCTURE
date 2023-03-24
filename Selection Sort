@@ -25,3 +25,12 @@ void print(int array[],int size){
         printf("%d ",array[i]);
     }
 }
+
+int main() {
+    int array[]={13,-2,43,3,3,41,32};
+    int size = sizeof(array)/sizeof(array[0]);
+    selectionsort(array,size);
+    print(array,size);
+
+    return 0;
+}
